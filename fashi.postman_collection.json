@@ -1,0 +1,483 @@
+{
+	"info": {
+		"_postman_id": "975deea0-d367-4ad0-a90e-6f6eab483c0e",
+		"name": "fashi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signup",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "44c30ba9-8bb7-4779-8fa8-cb4816e206e3",
+						"exec": [
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(2000);\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202]);\r",
+							"});\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"key is present\",function(){\r",
+							"pm.expect(pm.response.headers.get(\"Content-type\")).to.eql(\"application/json; charset=utf-8\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f8fe3960-3cbe-4246-8ece-27c3a88bd0fa",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"pit@pit.com\",\r\n    \"name\": \"ashokk\",\r\n    \"password\": \"asdh1233\",\r\n    \"gender\": \"Male\",\r\n    \"dob\": \"22-03-1990\",\r\n    \"mobileNo\": \"9090909090\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://206.189.140.174:8000/auth/signup",
+					"protocol": "http",
+					"host": [
+						"206",
+						"189",
+						"140",
+						"174"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "14f92465-40df-48c1-8b32-c7dbaac26105",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.test(\"Content-Type is present\", function () {\r",
+							"        pm.response.to.have.header(\"Content-Type\");\r",
+							"           });\r",
+							"  pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"pm.test(\"Status code name has string\", function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"pm.test(\"Expected String is present\",function(){\r",
+							"pm.response.to.have.header(\"content-Type\");\r",
+							"});\r",
+							"pm.test(\"response should be okay to process\", function () { \r",
+							"    pm.response.to.not.be.error; \r",
+							"    pm.response.to.not.have.jsonBody(\"error\"); \r",
+							"});\r",
+							"pm.test(\"Your test function\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    console.log(jsonData);\r",
+							"});\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.message).to.equal(\"SUCCESS\")\r",
+							"         });\r",
+							"     pm.test(\"Status\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.user.status).to .eql(\"I am new!\");\r",
+							"pm.expect(jsonData.user.status).to .eql(\"I am not new!\");\r",
+							"     });"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "35c6d6aa-e552-4ffc-a4b6-36f35ac3fb05",
+						"exec": [
+							"pm.request.headers.add({\r",
+							"key: 'Content-Type',\r",
+							"value: 'application/json'\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"pit@pit.com\",\r\n    \"password\": \"asdh1233\"\r\n    \r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://206.189.140.174:8000/auth/login",
+					"protocol": "http",
+					"host": [
+						"206",
+						"189",
+						"140",
+						"174"
+					],
+					"port": "8000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dashboard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "60489637-e2cd-4340-9e24-f3a497524cb4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"key is present\",function(){\r",
+							"pm.expect(pm.response.headers.get(\"Content-type\")).to.eql(\"application/json; charset=utf-8\");\r",
+							"});\r",
+							"pm.test(\"check if a userwith  is kannada\",function(){\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.except(jsonData[1].language).to.eql(\"kannada\");\r",
+							"});\r",
+							"pm.test(\"Body matches kannada\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"string_you_want_to_kannada\");\r",
+							"});\r",
+							"pm.test(\"Body is response_tvfashion\", function () {\r",
+							"    pm.response.to.have.body(\"response_tvfashion\");\r",
+							"});\r",
+							"pm.test(\"Response time is less than 2000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBpdEBwaXQuY29tIiwidXNlcklkIjoiNWY3MzA1OWFhNmM3NDQ3MjVhMmFhMTU0IiwiaWF0IjoxNjAxOTgwNzgxLCJleHAiOjE2MDE5ODQzODF9.x9WqUNO-9wkN0fJImStLFggemMrwP0O2wcmTAizrjcY",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://206.189.140.174:8000/dashboard/main",
+					"protocol": "http",
+					"host": [
+						"206",
+						"189",
+						"140",
+						"174"
+					],
+					"port": "8000",
+					"path": [
+						"dashboard",
+						"main"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "channel list",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7b033ef3-f918-4a34-a1ed-cb113e24610f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"key is present\",function(){\r",
+							"pm.expect(pm.response.headers.get(\"Content-type\")).to.eql(\"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBpdEBwaXQuY29tIiwidXNlcklkIjoiNWY3MzA1OWFhNmM3NDQ3MjVhMmFhMTU0IiwiaWF0IjoxNjAxOTgwNzgxLCJleHAiOjE2MDE5ODQzODF9.x9WqUNO-9wkN0fJImStLFggemMrwP0O2wcmTAizrjcY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"languageId\": \"1\",\r\n    \"langugename\": \"Kannada\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://206.189.140.174:8001/tv/{{yoyo}}",
+					"protocol": "http",
+					"host": [
+						"206",
+						"189",
+						"140",
+						"174"
+					],
+					"port": "8001",
+					"path": [
+						"tv",
+						"{{yoyo}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "showslist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "300a9f4d-14fe-41cc-acfc-8864017328d7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"key is present\",function(){\r",
+							"pm.expect(pm.response.headers.get(\"Content-type\")).to.eql(\"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBpdEBwaXQuY29tIiwidXNlcklkIjoiNWY3MzA1OWFhNmM3NDQ3MjVhMmFhMTU0IiwiaWF0IjoxNjAxOTgwNzgxLCJleHAiOjE2MDE5ODQzODF9.x9WqUNO-9wkN0fJImStLFggemMrwP0O2wcmTAizrjcY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"channelId\": \"1\",\r\n    \"channelname\": \"zee kannada\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://206.189.140.174:8001/tv/showslist",
+					"protocol": "http",
+					"host": [
+						"206",
+						"189",
+						"140",
+						"174"
+					],
+					"port": "8001",
+					"path": [
+						"tv",
+						"showslist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tvserialepisode",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ac89554-89ac-4b93-87cb-59b35dde42ef",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"key is present\",function(){\r",
+							"pm.expect(pm.response.headers.get(\"Content-type\")).to.eql(\"application/json; charset=utf-8\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBpdEBwaXQuY29tIiwidXNlcklkIjoiNWY3MzA1OWFhNmM3NDQ3MjVhMmFhMTU0IiwiaWF0IjoxNjAxODkxMzExLCJleHAiOjE2MDE4OTQ5MTF9.dCHjg3jrsDYHjm-CaVrN6decTzMD1lbC_3__jinGLaI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"putta\",\r\n    \"language\": \"Kannada\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://206.189.140.174:8001/tvSerial/tvserialepisode",
+					"protocol": "http",
+					"host": [
+						"206",
+						"189",
+						"140",
+						"174"
+					],
+					"port": "8001",
+					"path": [
+						"tvSerial",
+						"tvserialepisode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "tvproducts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d93bc85-f784-4c9e-bdf9-1672907df024",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"key is present\",function(){\r",
+							"pm.expect(pm.response.headers.get(\"Content-type\")).to.eql(\"application/json; charset=utf-8\");\r",
+							"});\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBpdEBwaXQuY29tIiwidXNlcklkIjoiNWY3MzA1OWFhNmM3NDQ3MjVhMmFhMTU0IiwiaWF0IjoxNjAxODkxMzExLCJleHAiOjE2MDE4OTQ5MTF9.dCHjg3jrsDYHjm-CaVrN6decTzMD1lbC_3__jinGLaI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"serialname\": \"putta\",\r\n    \"episodeno\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://206.189.140.174:8001/product/tvproducts",
+					"protocol": "http",
+					"host": [
+						"206",
+						"189",
+						"140",
+						"174"
+					],
+					"port": "8001",
+					"path": [
+						"product",
+						"tvproducts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6ef1ec9e-3f4a-44f0-bc28-fd0bc88fde7a",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d1ed9b38-90d7-478f-83ed-f606bdad2faf",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "1dce9fad-36d1-4b30-94dd-19dc1ac03bd0",
+			"key": "yoyo",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
